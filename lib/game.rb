@@ -13,52 +13,34 @@ class Game
     ]
 
    def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    #initialize accepts 2 players and a board
-    #initialize defaults to two human players, X and O, with an empty board
     self.player_1 = player_1
     self.player_2 = player_2
     self.board = board
   end
 
    def current_player
-    #current_player returns the correct player, X, for the third move
     self.board.turn_count.even? ? player_1 : player_2
   end
 
    def won?
-    #won? returns false for a draw
-    #won? returns the correct winning combination in the case of a win
-    #won? isn't hard-coded
     WIN_COMBINATIONS.detect do |combo|
       self.board.cells.values_at(combo[0], combo[1], combo[2]) == ["X", "X", "X"]  || self.board.cells.values_at(combo[0], combo[1], combo[2]) == ["O", "O", "O"]
     end
   end
 
    def draw?
-    #draw? returns true for a draw
-    #draw? returns false for a won game
-    #draw? returns false for an in-progress game
     won? || self.board.turn_count < 9 ? false : true
   end
 
    def over?
-    #over? returns true for a draw
-    #over? returns true for a won game
-    #over? returns false for an in-progress game
     won? || draw? ? true : false
   end
 
    def winner
-    #winner returns X when X won
-    #winner returns O when O won
-    #winner returns nil when no winner
     return self.board.cells[won?[0]] if won?
   end
 
    def turn
-    #turn makes valid moves
-    #turn asks for input again after a failed validation
-    #turn changes to player 2 after the first turn
     puts "Please enter 1-9 for your move."
     input = current_player.move(self.board)
     self.board.valid_move?(input) ? self.board.update(input, current_player) : turn
