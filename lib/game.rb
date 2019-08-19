@@ -66,18 +66,6 @@ class Game
   end
 
    def play
-    #play asks for players input on a turn of the game
-    #play checks if the game is over after every turn
-    #play plays the first turn of the game
-    #play plays the first few turns of the game
-    #play checks if the game is won after every turn
-    #play checks if the game is a draw after every turn
-    #play stops playing if someone has won
-    #play congratulates the winner X
-    #play congratulates the winner O
-    #play stops playing in a draw
-    #play prints "Cat's Game!" on a draw
-    #Game play plays through an entire game
     while !over?
       turn
       self.board.display
